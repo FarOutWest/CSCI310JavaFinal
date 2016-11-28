@@ -1,5 +1,6 @@
 package csci310javafinal;
 
+import static kiss.API.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -28,7 +29,6 @@ public class Board extends JPanel implements ActionListener {
     Blocks[] board;
     
     class TAdapter extends KeyAdapter {
-        @Override
         public void keyPressed(KeyEvent e) {
             if (!Started || currentPiece.getShape() == Blocks.NoShape) {
                 return;
@@ -76,7 +76,7 @@ public class Board extends JPanel implements ActionListener {
         clearBoard();
     }
     
-    public void actionHappened(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
         if (FallingFinished) {
             FallingFinished = false;
             newPiece();

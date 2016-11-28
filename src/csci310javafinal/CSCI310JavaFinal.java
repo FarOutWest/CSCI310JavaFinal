@@ -15,7 +15,7 @@ public class CSCI310JavaFinal extends JFrame {
         add(board);
         board.start();
         setSize(200, 400);
-        setTitle("Tetris");
+        setTitle("CSCI 310 Java Final: Tetris Clone");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
