@@ -11,7 +11,12 @@ public class CSCI310JavaFinal extends JFrame {
     public CSCI310JavaFinal() {
         statusbar = new JLabel(" 0");
         add(statusbar, BorderLayout.SOUTH);
-        //add code for Board here when its done
+        Board board = new Board(this);
+        add(board);
+        board.start();
+        setSize(200, 400);
+        setTitle("Tetris");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     public JLabel getStatusBar() {
