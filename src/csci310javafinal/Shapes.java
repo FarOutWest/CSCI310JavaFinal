@@ -96,20 +96,33 @@ public class Shapes {
         return m;
     }
     
-    public Shapes rotate() {
-        if (pieceShape == Blocks.SquareShape) return this;
-        
+    public Shapes rotateLeft() 
+    {
+        if (pieceShape == Blocks.SquareShape)
+            return this;
+
         Shapes result = new Shapes();
         result.pieceShape = pieceShape;
-        
+
         for (int i = 0; i < 4; ++i) {
             result.setX(i, y(i));
             result.setY(i, -x(i));
         }
         return result;
     }
-    
-    void testrotate() {
-        
+
+    public Shapes rotateRight()
+    {
+        if (pieceShape == Blocks.SquareShape)
+            return this;
+
+        Shapes result = new Shapes();
+        result.pieceShape = pieceShape;
+
+        for (int i = 0; i < 4; ++i) {
+            result.setX(i, -y(i));
+            result.setY(i, x(i));
+        }
+        return result;
     }
 }
