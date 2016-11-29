@@ -151,11 +151,22 @@ public class Board extends JPanel implements ActionListener {
             newPiece();
         }
     }
+    
+    private int randomX() {
+        int max = BoardWidth;
+        int min = 1;
+        int random = (int) (Math.random() * max + min);
+        return random;
+    }
+    
+    void testrandomX() {
+        
+    }
 
     private void newPiece() {
         currentPiece.setRandomShape();
-        currentX = BoardWidth / 2 + 1;
-        currentY = BoardHeight - 1 + currentPiece.minY();
+        currentX = randomX();
+        currentY = (int) (BoardHeight - 1 + currentPiece.minY());
 
         if (!tryMove(currentPiece, currentX, currentY)) {
             currentPiece.setShape(Blocks.NoShape);
