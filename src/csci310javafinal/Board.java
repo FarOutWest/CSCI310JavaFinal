@@ -28,43 +28,6 @@ public class Board extends JPanel implements ActionListener {
     Shapes currentPiece;
     Blocks[] board;
     
-    class TAdapter extends KeyAdapter {
-        public void keyPressed(KeyEvent e) {
-            if (!Started || currentPiece.getShape() == Blocks.NoShape) {
-                return;
-            }
-
-            int keycode = e.getKeyCode();
-
-            if (keycode == 'p' || keycode == 'P') {
-                pause();
-                return;
-            }
-
-            if (Paused) {
-                return;
-            }
-
-            switch (keycode) {
-                case KeyEvent.VK_LEFT:
-                    tryMove(currentPiece, currentX - 1, currentY);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    tryMove(currentPiece, currentX + 1, currentY);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    tryMove(currentPiece, currentX, currentY - 1);
-                    break;
-                case KeyEvent.VK_SPACE:
-                    tryMove(currentPiece.rotate(), currentX, currentY);
-                    break;
-                case KeyEvent.VK_D:
-                    dropDown();
-                    break;
-            }
-        }
-    }
-    
     public Board(CSCI310JavaFinal parent) {
         setFocusable(true);
         currentPiece = new Shapes();
@@ -135,7 +98,7 @@ public class Board extends JPanel implements ActionListener {
         }
         
         if (currentPiece.getShape() != Blocks.NoShape) {
-                        for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 4; ++i) {
                 int x = currentX + currentPiece.x(i);
                 int y = currentY - currentPiece.y(i);
                 drawSquare(g, 0 + x * squareWidth(),
@@ -233,10 +196,10 @@ public class Board extends JPanel implements ActionListener {
     
     private void drawSquare(Graphics g, int x, int y, Blocks shape) {
         Color colors[] = { 
-            new Color (0, 0, 0),
-            new Color (100, 200, 200),
-            new Color (200, 200, 100),
-            new Color (100, 100, 200)
+            new Color(0, 0, 0), new Color(204, 102, 102), 
+            new Color(102, 204, 102), new Color(102, 102, 204), 
+            new Color(204, 204, 102), new Color(204, 102, 204), 
+            new Color(102, 204, 204), new Color(218, 170, 0)
         };
         
         Color color = colors[shape.ordinal()];
@@ -251,5 +214,41 @@ public class Board extends JPanel implements ActionListener {
                    x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() -1,
                    x + squareWidth() - 1, y + 1);
+    }
+    
+    class TAdapter extends KeyAdapter {
+        public void keyPressed(KeyEvent e) {
+            if (!Started || currentPiece.getShape() == Blocks.NoShape) return;
+
+            int keycode = e.getKeyCode();
+
+            if (keycode == 'p' || keycode == 'P') {
+                pause();
+                return;
+            }
+
+            if (Paused) return;
+
+            switch (keycode) {
+                case KeyEvent.VK_LEFT:
+                    tryMove(currentPiece, currentX - 1, currentY);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    tryMove(currentPiece, currentX + 1, currentY);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    tryMove(currentPiece.rotateLeft(), currentX, currentY);
+                    break;
+                case KeyEvent.VK_UP: 
+                    tryMove(currentPiece.rotateRight(), currentX, currentY);
+                    break;
+                case KeyEvent.VK_SPACE:
+                    tryMove(currentPiece, currentX, currentY - 1);
+                    break;
+                case KeyEvent.VK_D:
+                    dropDown();
+                    break;
+            }
+        }
     }
 }
