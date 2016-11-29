@@ -63,32 +63,30 @@ public class Shapes {
         setShape(values[x]);
     }
 
-    void testsetRandomShape() {
-        
-    }
-
     public int minX() {
         int m = coords[0][0];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) 
             m = Math.min(m, coords[i][0]);
-        }
         return m;
     }
     
     void testMinX() {
-        
+        int min = minX();
+        for (int i = 0; i < 4; i++)
+            assert min == coords[i][0];
     }
 
     public int minY() {
         int m = coords[0][1];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
             m = Math.min(m, coords[i][1]);
-        }
         return m;
     }
     
     void testMinY() {
-        
+        int min = minY();
+        for (int i = 0; i < 4; i++)
+            assert min == coords[i][1];
     }
 
     public Shapes rotate()//rotateLeft() 
@@ -106,23 +104,4 @@ public class Shapes {
         }
         return result;
     }
-    
-    void testRotate() {
-        
-    }
-
-    /*public Shapes rotateRight()
-    {
-        if (pieceShape == Blocks.SquareShape)
-            return this;
-
-        Shapes result = new Shapes();
-        result.pieceShape = pieceShape;
-
-        for (int i = 0; i < 4; ++i) {
-            result.setX(i, -y(i));
-            result.setY(i, x(i));
-        }
-        return result;
-    }*/
 }
