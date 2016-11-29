@@ -28,6 +28,10 @@ public class CSCI310JavaFinal extends JFrame {
     public JLabel getStatusBar() {
         return statusbar;
     }
+    
+    void testgetStatusBar() {
+        
+    }
 
     public static void main(String[] args) {
         CSCI310JavaFinal game = new CSCI310JavaFinal();

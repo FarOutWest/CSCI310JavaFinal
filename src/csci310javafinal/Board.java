@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import csci310javafinal.Shapes.Blocks;
+import static java.lang.String.valueOf;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -50,22 +51,14 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    int squareWidth() {
-        return (int) getSize().getWidth() / BoardWidth;
-    }
+    int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
 
-    int squareHeight() {
-        return (int) getSize().getHeight() / BoardHeight;
-    }
+    int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
 
-    Blocks shapeAt(int x, int y) {
-        return board[(y * BoardWidth) + x];
-    }
+    Blocks shapeLoc(int x, int y) { return board[(y * BoardWidth) + x]; }
 
     public void start() {
-        if (Paused) {
-            return;
-        }
+        if (Paused) return;
         Started = true;
         FallingFinished = false;
         numLinesRemoved = 0;
@@ -75,9 +68,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void pause() {
-        if (!Started) {
-            return;
-        }
+        if (!Started) return;
+        
         Paused = !Paused;
         if (Paused) {
             timer.stop();
@@ -96,7 +88,7 @@ public class Board extends JPanel implements ActionListener {
 
         for (int i = 0; i < BoardHeight; ++i) {
             for (int j = 0; j < BoardWidth; ++j) {
-                Blocks shape = shapeAt(j, BoardHeight - i - 1);
+                Blocks shape = shapeLoc(j, BoardHeight - i - 1);
                 if (shape != Blocks.NoShape) {
                     drawSquare(g, 0 + j * squareWidth(),
                             boardTop + i * squareHeight(), shape);
@@ -127,15 +119,11 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void oneLineDown() {
-        if (!tryMove(currentPiece, currentX, currentY - 1)) {
-            pieceDropped();
-        }
+        if (!tryMove(currentPiece, currentX, currentY - 1)) pieceDropped();
     }
 
     private void clearBoard() {
-        for (int i = 0; i < BoardHeight * BoardWidth; ++i) {
-            board[i] = Blocks.NoShape;
-        }
+        for (int i = 0; i < BoardHeight * BoardWidth; ++i) board[i] = Blocks.NoShape;
     }
 
     private void pieceDropped() {
@@ -144,29 +132,34 @@ public class Board extends JPanel implements ActionListener {
             int y = currentY - currentPiece.y(i);
             board[(y * BoardWidth) + x] = currentPiece.getShape();
         }
-
         removeFullLines();
-
-        if (!FallingFinished) {
-            newPiece();
-        }
+        
+        if (!FallingFinished) newPiece();
     }
     
     private int randomX() {
-        int max = BoardWidth;
-        int min = 1;
-        int random = (int) (Math.random() * max + min);
+        int max = BoardWidth - 2;
+        int min = 2;
+        int random = (int) (Math.random() * max - 1 + min);
         return random;
     }
     
     void testrandomX() {
-        
+        int test = randomX();
+        assert (test == 2 || test == 3 || test == 4 || test == 5 || 
+                test == 6 || test == 7 || test == 8);
+        println("testing RandomX = " + test);
     }
 
     private void newPiece() {
         currentPiece.setRandomShape();
         currentX = randomX();
         currentY = (int) (BoardHeight - 1 + currentPiece.minY());
+        
+        testrandomX();
+        System.out.print(valueOf(currentPiece) + EOL);
+        System.out.print("currentX = " + currentX + EOL);
+        System.out.print("currentY = " + currentY + EOL);
 
         if (!tryMove(currentPiece, currentX, currentY)) {
             currentPiece.setShape(Blocks.NoShape);
@@ -183,9 +176,7 @@ public class Board extends JPanel implements ActionListener {
             if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) {
                 return false;
             }
-            if (shapeAt(x, y) != Blocks.NoShape) {
-                return false;
-            }
+            if (shapeLoc(x, y) != Blocks.NoShape) return false;
         }
 
         currentPiece = newPiece;
@@ -202,7 +193,7 @@ public class Board extends JPanel implements ActionListener {
             boolean lineIsFull = true;
 
             for (int j = 0; j < BoardWidth; ++j) {
-                if (shapeAt(j, i) == Blocks.NoShape) {
+                if (shapeLoc(j, i) == Blocks.NoShape) {
                     lineIsFull = false;
                     break;
                 }
@@ -212,7 +203,7 @@ public class Board extends JPanel implements ActionListener {
                 ++numFullLines;
                 for (int k = i; k < BoardHeight - 1; ++k) {
                     for (int j = 0; j < BoardWidth; ++j) {
-                        board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
+                        board[(k * BoardWidth) + j] = shapeLoc(j, k + 1);
                     }
                 }
             }
@@ -253,9 +244,7 @@ public class Board extends JPanel implements ActionListener {
 
         public void keyPressed(KeyEvent e) {
 
-            if (!Started || currentPiece.getShape() == Blocks.NoShape) {
-                return;
-            }
+            if (!Started || currentPiece.getShape() == Blocks.NoShape) return;
 
             int keycode = e.getKeyCode();
 

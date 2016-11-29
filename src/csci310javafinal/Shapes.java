@@ -28,14 +28,14 @@ public class Shapes {
 
     public void setShape(Blocks shape) {
         coordsTable = new int[][][]{
-            {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
-            {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
-            {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
-            {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
-            {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
-            {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
-            {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
-            {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
+            {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, //NoShape
+            {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}}, //ZShape
+            {{0, -1}, {0, 0}, {1, 0}, {1, 1}}, //SShape
+            {{0, -1}, {0, 0}, {0, 1}, {0, 2}}, //LineShape
+            {{-1, 0}, {0, 0}, {1, 0}, {0, 1}}, //TShape
+            {{0, 0}, {1, 0}, {0, 1}, {1, 1}}, //SquareShape
+            {{-1, -1}, {0, -1}, {0, 0}, {0, 1}}, //LShape
+            {{1, -1}, {0, -1}, {0, 0}, {0, 1}} //MirroredLShape
         };
 
         for (int i = 0; i < 4; i++) {
@@ -46,39 +46,25 @@ public class Shapes {
         pieceShape = shape;
     }
 
-    void testsetShape(Blocks shape) {
+    private void setX(int index, int x) { coords[index][0] = x; }
 
-    }
+    private void setY(int index, int y) { coords[index][1] = y; }
 
-    private void setX(int index, int x) {
-        coords[index][0] = x;
-    }
+    public int x(int index) { return coords[index][0]; }
 
-    private void setY(int index, int y) {
-        coords[index][1] = y;
-    }
+    public int y(int index) { return coords[index][1]; }
 
-    public int x(int index) {
-        return coords[index][0];
-    }
-
-    public int y(int index) {
-        return coords[index][1];
-    }
-
-    public Blocks getShape() {
-        return pieceShape;
-    }
+    public Blocks getShape() { return pieceShape; }
 
     public void setRandomShape() {
         Random r = new Random();
-        int x = Math.abs(r.nextInt()) % 7 + 1;
+        int x = Math.abs(r.nextInt()) % 7 + 1; //pick a random shape
         Blocks[] values = Blocks.values();
         setShape(values[x]);
     }
 
     void testsetRandomShape() {
-
+        
     }
 
     public int minX() {
@@ -88,6 +74,10 @@ public class Shapes {
         }
         return m;
     }
+    
+    void testMinX() {
+        
+    }
 
     public int minY() {
         int m = coords[0][1];
@@ -95,6 +85,10 @@ public class Shapes {
             m = Math.min(m, coords[i][1]);
         }
         return m;
+    }
+    
+    void testMinY() {
+        
     }
 
     public Shapes rotate()//rotateLeft() 
@@ -111,6 +105,10 @@ public class Shapes {
             result.setY(i, -x(i));
         }
         return result;
+    }
+    
+    void testRotate() {
+        
     }
 
     /*public Shapes rotateRight()
