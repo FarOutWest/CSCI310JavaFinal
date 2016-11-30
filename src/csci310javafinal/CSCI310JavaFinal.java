@@ -30,7 +30,9 @@ public class CSCI310JavaFinal extends JFrame {
     }
     
     void testgetStatusBar() {
-        
+        JLabel status;
+        status = new JLabel();
+        assert (status == statusbar);
     }
 
     public static void main(String[] args) {

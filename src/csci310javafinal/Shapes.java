@@ -72,8 +72,10 @@ public class Shapes {
     
     void testMinX() {
         int min = minX();
-        for (int i = 0; i < 4; i++)
-            assert min == coords[i][0];
+        for (int i = 0; i < 4; i++) {
+            assert (min == coords[i][0]);
+            println ("min = " + min + " " + "coords[i][0] = " + coords[i][0]);
+        }
     }
 
     public int minY() {
@@ -85,8 +87,10 @@ public class Shapes {
     
     void testMinY() {
         int min = minY();
-        for (int i = 0; i < 4; i++)
-            assert min == coords[i][1];
+        for (int i = 0; i < 4; i++) {
+            assert (min == coords[i][1]);
+            println ("min = " + min + " " + "coords[i][0] = " + coords[i][1]);
+        }
     }
 
     public Shapes rotate()//rotateLeft() 
