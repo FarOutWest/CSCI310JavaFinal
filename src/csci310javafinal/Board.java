@@ -165,7 +165,8 @@ public class Board extends JPanel implements ActionListener {
             currentPiece.setShape(Blocks.NoShape);
             timer.stop();
             Started = false;
-            statusbar.setText("GAME OVER!");
+            statusbar.setText("GAME OVER - SCORE: " + valueOf(numLinesRemoved));
+            //statusbar.setText(valueOf(numLinesRemoved));
         }
     }
 
@@ -219,12 +220,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void drawSquare(Graphics g, int x, int y, Blocks shape) {
-        Color colors[] = {
-            new Color(0, 0, 0), new Color(200, 100, 100),
-            new Color(100, 200, 100), new Color(100, 100, 200),
-            new Color(200, 200, 100), new Color(200, 100, 200),
-            new Color(100, 200, 200), new Color(220, 170, 0)
-        };
+        Color colors[] = { Color.BLACK, Color.CYAN, Color.ORANGE, Color.RED, 
+                           Color.YELLOW, Color.MAGENTA, Color.GREEN, Color.GRAY };
 
         Color color = colors[shape.ordinal()];
 

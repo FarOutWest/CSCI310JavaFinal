@@ -6,16 +6,8 @@ import java.lang.Math;
 
 public class Shapes {
 
-    enum Blocks {
-        NoShape,
-        ZShape,
-        SShape,
-        LineShape,
-        TShape,
-        SquareShape,
-        LShape,
-        MirroredLShape
-    };
+    enum Blocks { NoShape, ZShape, SShape, LineShape, TShape, SquareShape, 
+                  LShape, MirroredLShape };
 
     private Blocks pieceShape;
     private int coords[][];

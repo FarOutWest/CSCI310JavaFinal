@@ -15,13 +15,13 @@ public class CSCI310JavaFinal extends JFrame {
     public CSCI310JavaFinal() {
         statusbar = new JLabel(" 0");
         statusbar.setFont(new Font(statusbar.getFont().getName(), 
-                          statusbar.getFont().getStyle(), 30));        
+                          statusbar.getFont().getStyle(), 20));        
         add(statusbar, BorderLayout.SOUTH);
         Board board = new Board(this);
         add(board);
         board.start();
         setSize(300, 600);
-        setTitle("CSCI 310 Java Final");
+        setTitle("Tetris Clone");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
