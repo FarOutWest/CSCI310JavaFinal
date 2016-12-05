@@ -33,13 +33,18 @@ public class Board extends JPanel implements ActionListener {
     public Board(CSCI310JavaFinal parent) {
         setFocusable(true);
         currentPiece = new Shapes();
-        timer = new Timer(400, this);
-        timer.start();
+        //timer = new Timer(400, this);
+        //timer.start();
+        //testTimer();
 
         statusbar = parent.getStatusBar();
         board = new Blocks[BoardWidth * BoardHeight];
         addKeyListener(new TAdapter());
         clearBoard();
+    }
+
+    final void testTimer() {
+        println("timer = " + timer.getDelay());
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -51,25 +56,39 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
+    int squareWidth() {
+        return (int) getSize().getWidth() / BoardWidth;
+    }
 
-    int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
+    int squareHeight() {
+        return (int) getSize().getHeight() / BoardHeight;
+    }
 
-    Blocks shapeLoc(int x, int y) { return board[(y * BoardWidth) + x]; }
+    Blocks shapeLoc(int x, int y) {
+        return board[(y * BoardWidth) + x];
+    }
 
     public void start() {
-        if (Paused) return;
+        if (Paused) {
+            return;
+        }
         Started = true;
         FallingFinished = false;
-        numLinesRemoved = 0;
+        if (numLinesRemoved == 0) {
+            timer = new Timer(400, this);
+            timer.start();
+            testTimer();
+        }
         clearBoard();
         newPiece();
         timer.start();
     }
 
     private void pause() {
-        if (!Started) return;
-        
+        if (!Started) {
+            return;
+        }
+
         Paused = !Paused;
         if (Paused) {
             timer.stop();
@@ -119,11 +138,15 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void oneLineDown() {
-        if (!tryMove(currentPiece, currentX, currentY - 1)) pieceDropped();
+        if (!tryMove(currentPiece, currentX, currentY - 1)) {
+            pieceDropped();
+        }
     }
 
     private void clearBoard() {
-        for (int i = 0; i < BoardHeight * BoardWidth; ++i) board[i] = Blocks.NoShape;
+        for (int i = 0; i < BoardHeight * BoardWidth; ++i) {
+            board[i] = Blocks.NoShape;
+        }
     }
 
     private void pieceDropped() {
@@ -133,21 +156,23 @@ public class Board extends JPanel implements ActionListener {
             board[(y * BoardWidth) + x] = currentPiece.getShape();
         }
         removeFullLines();
-        
-        if (!FallingFinished) newPiece();
+
+        if (!FallingFinished) {
+            newPiece();
+        }
     }
-    
+
     private int randomX() {
         int max = BoardWidth - 2;
         int min = 2;
         int random = (int) (Math.random() * max - 1 + min);
         return random;
     }
-    
+
     void testrandomX() {
         int test = randomX();
-        assert (test == 2 || test == 3 || test == 4 || test == 5 || 
-                test == 6 || test == 7 || test == 8);
+        assert (test == 2 || test == 3 || test == 4 || test == 5
+                || test == 6 || test == 7 || test == 8);
         println("testing RandomX = " + test);
     }
 
@@ -155,7 +180,7 @@ public class Board extends JPanel implements ActionListener {
         currentPiece.setRandomShape();
         currentX = randomX();
         currentY = (int) (BoardHeight - 1 + currentPiece.minY());
-        
+
         testrandomX();
         System.out.print(valueOf(currentPiece) + EOL);
         System.out.print("currentX = " + currentX + EOL);
@@ -177,7 +202,9 @@ public class Board extends JPanel implements ActionListener {
             if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) {
                 return false;
             }
-            if (shapeLoc(x, y) != Blocks.NoShape) return false;
+            if (shapeLoc(x, y) != Blocks.NoShape) {
+                return false;
+            }
         }
 
         currentPiece = newPiece;
@@ -211,17 +238,54 @@ public class Board extends JPanel implements ActionListener {
         }
 
         if (numFullLines > 0) {
+            if (Paused) { return; }
             numLinesRemoved += numFullLines;
             statusbar.setText(String.valueOf(numLinesRemoved));
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
+
+            if (numLinesRemoved >= 1) {
+                if (Paused) { return; }
+                timer = new Timer(300, this);
+                timer.start();
+                testTimer();
+            }
+
+            if (numLinesRemoved >= 2) {
+                if (Paused) { return; }
+                timer = new Timer(250, this);
+                timer.start();
+                testTimer();
+            }
+
+            if (numLinesRemoved >= 4) {
+                if (Paused) { return; }
+                timer = new Timer(150, this);
+                timer.start();
+                testTimer();
+            }
+
+            if (numLinesRemoved >= 6) {
+                if (Paused) { return; }
+                timer = new Timer(100, this);
+                timer.start();
+                testTimer();
+            }
+
+            if (numLinesRemoved >= 8) {
+                if (Paused) { return; }
+                timer = new Timer(50, this);
+                timer.start();
+                testTimer();
+            }
+
             repaint();
         }
     }
 
     private void drawSquare(Graphics g, int x, int y, Blocks shape) {
-        Color colors[] = { Color.BLACK, Color.CYAN, Color.ORANGE, Color.RED, 
-                           Color.YELLOW, Color.MAGENTA, Color.GREEN, Color.GRAY };
+        Color colors[] = {Color.BLACK, Color.CYAN, Color.ORANGE, Color.RED,
+            Color.YELLOW, Color.MAGENTA, Color.GREEN, Color.GRAY};
 
         Color color = colors[shape.ordinal()];
 
@@ -241,7 +305,9 @@ public class Board extends JPanel implements ActionListener {
 
         public void keyPressed(KeyEvent e) {
 
-            if (!Started || currentPiece.getShape() == Blocks.NoShape) return;
+            if (!Started || currentPiece.getShape() == Blocks.NoShape) {
+                return;
+            }
 
             int keycode = e.getKeyCode();
 
@@ -249,13 +315,15 @@ public class Board extends JPanel implements ActionListener {
                 pause();
                 return;
             }
-            
+
             if (keycode == 'd' || keycode == 'D') {
                 dropDown();
                 return;
             }
 
-            if (Paused) return;
+            if (Paused) {
+                return;
+            }
 
             switch (keycode) {
                 case KeyEvent.VK_LEFT:
