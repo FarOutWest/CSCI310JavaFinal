@@ -69,9 +69,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void start() {
-        if (Paused) {
-            return;
-        }
+        if (Paused) { return; }
         Started = true;
         FallingFinished = false;
         if (numLinesRemoved == 0) {
@@ -85,9 +83,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void pause() {
-        if (!Started) {
-            return;
-        }
+        if (!Started) { return; }
 
         Paused = !Paused;
         if (Paused) {
@@ -238,45 +234,55 @@ public class Board extends JPanel implements ActionListener {
         }
 
         if (numFullLines > 0) {
-            if (Paused) { return; }
+            if (Paused == true) { pause(); }
             numLinesRemoved += numFullLines;
             statusbar.setText(String.valueOf(numLinesRemoved));
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
             if (numLinesRemoved >= 1) {
-                if (Paused) { return; }
+                if (Paused == true) { pause(); }
                 timer = new Timer(300, this);
-                timer.start();
-                testTimer();
+                if (Paused == false) { 
+                    timer.start();
+                    testTimer();
+                }
             }
 
             if (numLinesRemoved >= 2) {
-                if (Paused) { return; }
+                if (Paused == true) { pause(); }
                 timer = new Timer(250, this);
-                timer.start();
-                testTimer();
+                if (Paused == false) {
+                    timer.start();
+                    testTimer();
+                }
             }
 
             if (numLinesRemoved >= 4) {
-                if (Paused) { return; }
+                if (Paused == true) { pause(); }
                 timer = new Timer(150, this);
-                timer.start();
-                testTimer();
+                if (Paused == false) {
+                    timer.start();
+                    testTimer();
+                }
             }
 
             if (numLinesRemoved >= 6) {
-                if (Paused) { return; }
+                if (Paused == true) { pause(); }
                 timer = new Timer(100, this);
-                timer.start();
-                testTimer();
+                if (Paused == false) {
+                    timer.start();
+                    testTimer();
+                }
             }
 
             if (numLinesRemoved >= 8) {
-                if (Paused) { return; }
+                if (Paused == true) { pause(); }
                 timer = new Timer(50, this);
-                timer.start();
-                testTimer();
+                if (Paused == false) {
+                    timer.start();
+                    testTimer();
+                }
             }
 
             repaint();
