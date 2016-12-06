@@ -86,7 +86,7 @@ public class Shapes {
         }
     }
 
-    public Shapes rotate()//rotateLeft() 
+    public Shapes rotate() 
     {
         if (pieceShape == Blocks.SquareShape) {
             return this;

@@ -33,10 +33,6 @@ public class Board extends JPanel implements ActionListener {
     public Board(CSCI310JavaFinal parent) {
         setFocusable(true);
         currentPiece = new Shapes();
-        //timer = new Timer(400, this);
-        //timer.start();
-        //testTimer();
-
         statusbar = parent.getStatusBar();
         board = new Blocks[BoardWidth * BoardHeight];
         addKeyListener(new TAdapter());
@@ -176,7 +172,8 @@ public class Board extends JPanel implements ActionListener {
         currentPiece.setRandomShape();
         currentX = randomX();
         currentY = (int) (BoardHeight - 1 + currentPiece.minY());
-
+        
+        //Some Testing
         testrandomX();
         System.out.print(valueOf(currentPiece) + EOL);
         System.out.print("currentX = " + currentX + EOL);
@@ -187,7 +184,6 @@ public class Board extends JPanel implements ActionListener {
             timer.stop();
             Started = false;
             statusbar.setText("GAME OVER - SCORE: " + valueOf(numLinesRemoved));
-            //statusbar.setText(valueOf(numLinesRemoved));
         }
     }
 
@@ -284,7 +280,6 @@ public class Board extends JPanel implements ActionListener {
                     testTimer();
                 }
             }
-
             repaint();
         }
     }
@@ -308,7 +303,6 @@ public class Board extends JPanel implements ActionListener {
     }
 
     class TAdapter extends KeyAdapter {
-
         public void keyPressed(KeyEvent e) {
 
             if (!Started || currentPiece.getShape() == Blocks.NoShape) {
@@ -324,10 +318,6 @@ public class Board extends JPanel implements ActionListener {
 
             if (keycode == 'd' || keycode == 'D') {
                 dropDown();
-                return;
-            }
-
-            if (Paused) {
                 return;
             }
 
