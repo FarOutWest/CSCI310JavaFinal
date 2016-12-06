@@ -240,7 +240,7 @@ public class Board extends JPanel implements ActionListener {
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
-            if (numLinesRemoved >= 1) {
+            if (numLinesRemoved >= 10) {
                 if (Paused == true) { pause(); }
                 timer = new Timer(300, this);
                 if (Paused == false) { 
@@ -249,7 +249,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 2) {
+            if (numLinesRemoved >= 25) {
                 if (Paused == true) { pause(); }
                 timer = new Timer(250, this);
                 if (Paused == false) {
@@ -258,7 +258,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 4) {
+            if (numLinesRemoved >= 40) {
                 if (Paused == true) { pause(); }
                 timer = new Timer(150, this);
                 if (Paused == false) {
@@ -267,7 +267,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 6) {
+            if (numLinesRemoved >= 65) {
                 if (Paused == true) { pause(); }
                 timer = new Timer(100, this);
                 if (Paused == false) {
@@ -276,7 +276,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 8) {
+            if (numLinesRemoved >= 100) {
                 if (Paused == true) { pause(); }
                 timer = new Timer(50, this);
                 if (Paused == false) {
