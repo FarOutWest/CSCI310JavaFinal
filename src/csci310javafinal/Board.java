@@ -242,7 +242,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 10) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(300, this);
+                timer = new Timer(350, this);
                 if (Paused == false) { 
                     timer.start();
                     testTimer();
@@ -251,7 +251,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 25) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(250, this);
+                timer = new Timer(300, this);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -260,7 +260,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 40) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(150, this);
+                timer = new Timer(250, this);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -269,7 +269,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 65) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(100, this);
+                timer = new Timer(200, this);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -278,7 +278,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 100) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(50, this);
+                timer = new Timer(100, this);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
