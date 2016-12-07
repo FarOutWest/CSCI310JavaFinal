@@ -69,7 +69,7 @@ public class Board extends JPanel implements ActionListener {
         Started = true;
         FallingFinished = false;
         if (numLinesRemoved == 0) {
-            timer = new Timer(400, this);
+            timer = new Timer(450, this);
             timer.start();
             testTimer();
         }
@@ -236,9 +236,9 @@ public class Board extends JPanel implements ActionListener {
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
-            if (numLinesRemoved >= 10) {
+            if (numLinesRemoved >= 1) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(350, this);
+                timer.setDelay(400);
                 if (Paused == false) { 
                     timer.start();
                     testTimer();
@@ -247,7 +247,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 25) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(300, this);
+                timer.setDelay(375);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -256,7 +256,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 40) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(250, this);
+                timer.setDelay(350);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -265,7 +265,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 65) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(200, this);
+                timer.setDelay(300);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
@@ -274,7 +274,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numLinesRemoved >= 100) {
                 if (Paused == true) { pause(); }
-                timer = new Timer(100, this);
+                timer.setDelay(275);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
