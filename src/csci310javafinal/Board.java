@@ -236,7 +236,7 @@ public class Board extends JPanel implements ActionListener {
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
-            if (numLinesRemoved >= 1) {
+            if (numLinesRemoved >= 10) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(400);
                 if (Paused == false) { 
