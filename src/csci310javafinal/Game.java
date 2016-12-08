@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import csci310javafinal.Shapes.Blocks;
+import java.io.*;
 import static java.lang.String.valueOf;
 
 public class Game extends JPanel implements ActionListener {
-
     final int BoardWidth = 10;
     final int BoardHeight = 22;
 
@@ -162,6 +162,44 @@ public class Game extends JPanel implements ActionListener {
                 || test == 6 || test == 7 || test == 8);
         println("testing RandomX = " + test);
     }
+    
+    public static void writeHighScore() {
+        String highScore = statusbar.getText();
+        String oldHigh = "0";
+        String fileName = "highscore.txt";
+        String line = null;
+
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+                while((line = bufferedReader.readLine()) != null) {
+                    line = oldHigh;
+                    System.out.println(line);
+                }
+            }   
+            
+            FileWriter fileWriter = new FileWriter(fileName);
+            try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+                if (Integer.parseInt(oldHigh) > Integer.parseInt(highScore)) {
+                    bufferedWriter.write(oldHigh);
+                } else {
+                    bufferedWriter.write(highScore);
+                }
+            }
+        }
+        
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                fileName + "'");                
+        }
+        
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + fileName + "'");                  
+        }
+    }
 
     private void newPiece() {
         currentPiece.setRandomShape();
@@ -178,6 +216,7 @@ public class Game extends JPanel implements ActionListener {
             timer.stop();
             Started = false;
             statusbar.setText("GAME OVER - SCORE: " + valueOf(numLinesRemoved));
+            writeHighScore();
         }
     }
 
