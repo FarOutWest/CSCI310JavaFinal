@@ -163,10 +163,10 @@ public class Game extends JPanel implements ActionListener {
         println("testing RandomX = " + test);
     }
     
-    public static void writeHighScore() {
+    void writeHighScore() {
         String highScore = statusbar.getText();
         String oldHigh = "0";
-        //WONT READ FILE...
+        //WONT READ FILE... SO THATS GREAT....
         String fileName = "highscore.txt";
         String line = null;
 
@@ -190,15 +190,11 @@ public class Game extends JPanel implements ActionListener {
         }
         
         catch(FileNotFoundException ex) {
-            System.out.println(
-                "Unable to open file '" + 
-                fileName + "'");                
+            System.out.println("Unable to open file '" + fileName + "'");                
         }
         
         catch(IOException ex) {
-            System.out.println(
-                "Error reading file '" 
-                + fileName + "'");                  
+            System.out.println("Error reading from/writing to file '" + fileName + "'");                  
         }
     }
 

@@ -19,7 +19,7 @@ public class App extends JFrame {
         add(board);
         board.start();
         setSize(300, 600);
-        setTitle("Tetris Clone");
+        setTitle("Java Final Project");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
