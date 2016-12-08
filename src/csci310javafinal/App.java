@@ -1,10 +1,8 @@
 package csci310javafinal;
 
 import static kiss.API.*;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.*;
+import javax.swing.*;
 
 public class App extends JFrame {
 
