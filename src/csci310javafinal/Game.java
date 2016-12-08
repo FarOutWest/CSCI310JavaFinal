@@ -169,13 +169,8 @@ public class Game extends JPanel implements ActionListener {
             highScore = highScore.substring(1);
         }
         String oldHigh = "0";
-        //println("highScore: " + highScore);
         int oldHighInt = Integer.parseInt(oldHigh);
         int highScoreInt = Integer.parseInt(highScore);
-        //println("old high INT : " + oldHighInt);
-        //println("high score INT: " + highScoreInt);
-        //WONT READ FILE... SO THATS GREAT.... 
-        //println(new File("highscore.txt").getAbsolutePath());
         String fileName = "highscore.txt";
         String line = null;
 
