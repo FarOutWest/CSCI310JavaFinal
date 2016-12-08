@@ -165,7 +165,7 @@ public class Game extends JPanel implements ActionListener {
     
     void writeHighScore() {
         String highScore = statusbar.getText();
-        if (highScore == " 0") {
+        if (" 0".equals(highScore)) {
             highScore = highScore.substring(1);
         }
         String oldHigh = "0";
@@ -183,9 +183,9 @@ public class Game extends JPanel implements ActionListener {
             FileReader fileReader = new FileReader(fileName);
             try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
                 while((line = bufferedReader.readLine()) != null) {
-                    line = oldHigh;
-                    println("Old High Score: " + line);
+                    oldHigh = line;
                     oldHighInt = Integer.parseInt(line);
+                    println("Old High Score: " + line);
                 }
             }   
             
