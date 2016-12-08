@@ -19,7 +19,7 @@ public class Game extends JPanel implements ActionListener {
     int numLinesRemoved = 0;
     int currentX = 0;
     int currentY = 0;
-    JLabel statusbar;
+    static JLabel statusbar;
     Shapes currentPiece;
     Blocks[] gameBoard;
 
