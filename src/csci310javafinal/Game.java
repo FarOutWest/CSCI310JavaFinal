@@ -165,8 +165,17 @@ public class Game extends JPanel implements ActionListener {
     
     void writeHighScore() {
         String highScore = statusbar.getText();
+        if (highScore == " 0") {
+            highScore = highScore.substring(1);
+        }
         String oldHigh = "0";
-        //WONT READ FILE... SO THATS GREAT....
+        //println("highScore: " + highScore);
+        int oldHighInt = Integer.parseInt(oldHigh);
+        int highScoreInt = Integer.parseInt(highScore);
+        //println("old high INT : " + oldHighInt);
+        //println("high score INT: " + highScoreInt);
+        //WONT READ FILE... SO THATS GREAT.... 
+        //println(new File("highscore.txt").getAbsolutePath());
         String fileName = "highscore.txt";
         String line = null;
 
@@ -175,16 +184,19 @@ public class Game extends JPanel implements ActionListener {
             try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
                 while((line = bufferedReader.readLine()) != null) {
                     line = oldHigh;
-                    System.out.println(line);
+                    println("Old High Score: " + line);
+                    oldHighInt = Integer.parseInt(line);
                 }
             }   
             
             FileWriter fileWriter = new FileWriter(fileName);
             try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-                if (Integer.parseInt(oldHigh) > Integer.parseInt(highScore)) {
+                if ((int) oldHighInt >= (int) highScoreInt) {
                     bufferedWriter.write(oldHigh);
+                    println("You didn't beat the old High Score. Try Again!");
                 } else {
                     bufferedWriter.write(highScore);
+                    println("New High Score: " + highScore);
                 }
             }
         }
@@ -212,8 +224,8 @@ public class Game extends JPanel implements ActionListener {
             currentPiece.setShape(Blocks.NoShape);
             timer.stop();
             Started = false;
-            statusbar.setText("GAME OVER - SCORE: " + valueOf(numLinesRemoved));
             writeHighScore();
+            statusbar.setText("GAME OVER - SCORE: " + valueOf(numLinesRemoved));
         }
     }
 
