@@ -13,9 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import csci310javafinal.Shapes.Blocks;
 import static java.lang.String.valueOf;
-import static java.lang.String.valueOf;
-import static java.lang.String.valueOf;
-import static java.lang.String.valueOf;
 
 public class Game extends JPanel implements ActionListener {
 
@@ -31,13 +28,13 @@ public class Game extends JPanel implements ActionListener {
     int currentY = 0;
     JLabel statusbar;
     Shapes currentPiece;
-    Blocks[] board;
+    Blocks[] gameBoard;
 
     public Game(App parent) {
         setFocusable(true);
         currentPiece = new Shapes();
         statusbar = parent.getStatusBar();
-        board = new Blocks[BoardWidth * BoardHeight];
+        gameBoard = new Blocks[BoardWidth * BoardHeight];
         addKeyListener(new KAdapter());
         clearBoard();
     }
@@ -46,6 +43,7 @@ public class Game extends JPanel implements ActionListener {
         println("TIMER DELAY = " + timer.getDelay());
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (FallingFinished) {
             FallingFinished = false;
@@ -64,7 +62,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     Blocks shapeLoc(int x, int y) {
-        return board[(y * BoardWidth) + x];
+        return gameBoard[(y * BoardWidth) + x];
     }
 
     public void start() {
@@ -95,6 +93,7 @@ public class Game extends JPanel implements ActionListener {
         repaint();
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         Dimension size = getSize();
@@ -140,7 +139,7 @@ public class Game extends JPanel implements ActionListener {
 
     private void clearBoard() {
         for (int i = 0; i < BoardHeight * BoardWidth; ++i) {
-            board[i] = Blocks.NoShape;
+            gameBoard[i] = Blocks.NoShape;
         }
     }
 
@@ -148,7 +147,7 @@ public class Game extends JPanel implements ActionListener {
         for (int i = 0; i < 4; ++i) {
             int x = currentX + currentPiece.x(i);
             int y = currentY - currentPiece.y(i);
-            board[(y * BoardWidth) + x] = currentPiece.getShape();
+            gameBoard[(y * BoardWidth) + x] = currentPiece.getShape();
         }
         removeFullLines();
 
@@ -232,7 +231,7 @@ public class Game extends JPanel implements ActionListener {
                 ++numFullLines;
                 for (int k = i; k < BoardHeight - 1; ++k) {
                     for (int j = 0; j < BoardWidth; ++j) {
-                        board[(k * BoardWidth) + j] = shapeLoc(j, k + 1);
+                        gameBoard[(k * BoardWidth) + j] = shapeLoc(j, k + 1);
                     }
                 }
             }
@@ -322,6 +321,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     class KAdapter extends KeyAdapter {
+        @Override
         public void keyPressed(KeyEvent e) {
 
             if (!Started || currentPiece.getShape() == Blocks.NoShape) {
