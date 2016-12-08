@@ -40,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     final void testTimer() {
-        println("timer = " + timer.getDelay());
+        println("TIMER DELAY = " + timer.getDelay());
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -205,6 +205,12 @@ public class Board extends JPanel implements ActionListener {
         repaint();
         return true;
     }
+    
+    void testLevelError() {
+        println("ERROR:");
+        println("could not find level information");
+        println("Timer delay set to default 450");
+    }
 
     private void removeFullLines() {
         int numFullLines = 0;
@@ -236,7 +242,7 @@ public class Board extends JPanel implements ActionListener {
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
-            if (numLinesRemoved >= 10) {
+            if (numLinesRemoved >= 10 && numLinesRemoved <= 19) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(400);
                 if (Paused == false) { 
@@ -245,7 +251,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 25) {
+            else if (numLinesRemoved >= 20 && numLinesRemoved <= 34) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(375);
                 if (Paused == false) {
@@ -254,7 +260,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 40) {
+            else if (numLinesRemoved >= 35 && numLinesRemoved <= 49) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(350);
                 if (Paused == false) {
@@ -263,7 +269,7 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 65) {
+            else if (numLinesRemoved >= 50 && numLinesRemoved <= 74) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(300);
                 if (Paused == false) {
@@ -272,11 +278,21 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
-            if (numLinesRemoved >= 100) {
+            else if (numLinesRemoved >=  75) {
                 if (Paused == true) { pause(); }
                 timer.setDelay(275);
                 if (Paused == false) {
                     timer.start();
+                    testTimer();
+                }
+            }
+            
+            else {
+                if (Paused == true) { pause(); }
+                timer.setDelay(450);
+                if (Paused == false) {
+                    timer.start();
+                    testLevelError();
                     testTimer();
                 }
             }

@@ -18,7 +18,7 @@ public class Shapes {
         setShape(Blocks.NoShape);
     }
     
-    //{X, Y} coords of the individual blocks used to set the shapes
+    //"{X, Y}" coords of the individual blocks used to set the shapes
     public void setShape(Blocks shape) {
         coordsTable = new int[][][]{
             {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, //NoShape
