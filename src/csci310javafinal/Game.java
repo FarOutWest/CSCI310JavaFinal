@@ -166,6 +166,7 @@ public class Game extends JPanel implements ActionListener {
     public static void writeHighScore() {
         String highScore = statusbar.getText();
         String oldHigh = "0";
+        //WONT READ FILE...
         String fileName = "highscore.txt";
         String line = null;
 
