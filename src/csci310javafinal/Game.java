@@ -9,6 +9,7 @@ import java.io.*;
 import static java.lang.String.valueOf;
 
 public class Game extends JPanel implements ActionListener {
+
     final int BoardWidth = 10;
     final int BoardHeight = 22;
 
@@ -59,7 +60,9 @@ public class Game extends JPanel implements ActionListener {
     }
 
     public void start() {
-        if (Paused) { return; }
+        if (Paused) {
+            return;
+        }
         Started = true;
         FallingFinished = false;
         if (numLinesRemoved == 0) {
@@ -73,7 +76,9 @@ public class Game extends JPanel implements ActionListener {
     }
 
     private void pause() {
-        if (!Started) { return; }
+        if (!Started) {
+            return;
+        }
 
         Paused = !Paused;
         if (Paused) {
@@ -162,7 +167,7 @@ public class Game extends JPanel implements ActionListener {
                 || test == 6 || test == 7 || test == 8);
         println("testing RandomX = " + test);
     }
-    
+
     void writeHighScore() {
         String highScore = statusbar.getText();
         if (" 0".equals(highScore)) {
@@ -177,13 +182,13 @@ public class Game extends JPanel implements ActionListener {
         try {
             FileReader fileReader = new FileReader(fileName);
             try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-                while((line = bufferedReader.readLine()) != null) {
+                while ((line = bufferedReader.readLine()) != null) {
                     oldHigh = line;
                     oldHighInt = Integer.parseInt(line);
                     println("Old High Score: " + line);
                 }
-            }   
-            
+            }
+
             FileWriter fileWriter = new FileWriter(fileName);
             try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 if ((int) oldHighInt >= (int) highScoreInt) {
@@ -194,14 +199,10 @@ public class Game extends JPanel implements ActionListener {
                     println("New High Score: " + highScore);
                 }
             }
-        }
-        
-        catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");                
-        }
-        
-        catch(IOException ex) {
-            System.out.println("Error reading from/writing to file '" + fileName + "'");                  
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading from/writing to file '" + fileName + "'");
         }
     }
 
@@ -209,7 +210,7 @@ public class Game extends JPanel implements ActionListener {
         currentPiece.setRandomShape();
         currentX = randomX();
         currentY = (int) (BoardHeight - 1 + currentPiece.minY());
-        
+
         testrandomX();
         System.out.print(valueOf(currentPiece) + EOL);
         System.out.print("currentX = " + currentX + EOL);
@@ -242,7 +243,7 @@ public class Game extends JPanel implements ActionListener {
         repaint();
         return true;
     }
-    
+
     void testLevelError() {
         println("ERROR:");
         println("could not find level information");
@@ -274,59 +275,63 @@ public class Game extends JPanel implements ActionListener {
         }
 
         if (numFullLines > 0) {
-            if (Paused == true) { pause(); }
+            if (Paused == true) {
+                pause();
+            }
             numLinesRemoved += numFullLines;
             statusbar.setText(String.valueOf(numLinesRemoved));
             FallingFinished = true;
             currentPiece.setShape(Blocks.NoShape);
 
             if (numLinesRemoved >= 10 && numLinesRemoved <= 19) {
-                if (Paused == true) { pause(); }
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(400);
-                if (Paused == false) { 
+                if (Paused == false) {
                     timer.start();
                     testTimer();
                 }
-            }
-
-            else if (numLinesRemoved >= 20 && numLinesRemoved <= 34) {
-                if (Paused == true) { pause(); }
+            } else if (numLinesRemoved >= 20 && numLinesRemoved <= 34) {
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(375);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
                 }
-            }
-
-            else if (numLinesRemoved >= 35 && numLinesRemoved <= 49) {
-                if (Paused == true) { pause(); }
+            } else if (numLinesRemoved >= 35 && numLinesRemoved <= 49) {
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(350);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
                 }
-            }
-
-            else if (numLinesRemoved >= 50 && numLinesRemoved <= 74) {
-                if (Paused == true) { pause(); }
+            } else if (numLinesRemoved >= 50 && numLinesRemoved <= 74) {
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(300);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
                 }
-            }
-
-            else if (numLinesRemoved >=  75) {
-                if (Paused == true) { pause(); }
+            } else if (numLinesRemoved >= 75) {
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(275);
                 if (Paused == false) {
                     timer.start();
                     testTimer();
                 }
-            }
-            
-            else {
-                if (Paused == true) { pause(); }
+            } else {
+                if (Paused == true) {
+                    pause();
+                }
                 timer.setDelay(450);
                 if (Paused == false) {
                     timer.start();
@@ -357,6 +362,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     class KAdapter extends KeyAdapter {
+
         @Override
         public void keyPressed(KeyEvent e) {
 
@@ -376,19 +382,21 @@ public class Game extends JPanel implements ActionListener {
                 return;
             }
 
-            switch (keycode) {
-                case KeyEvent.VK_LEFT:
-                    tryMove(currentPiece, currentX - 1, currentY);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    tryMove(currentPiece, currentX + 1, currentY);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    tryMove(currentPiece, currentX, currentY - 1);
-                    break;
-                case KeyEvent.VK_SPACE:
-                    tryMove(currentPiece.rotate(), currentX, currentY);
-                    break;
+            if (!Paused) {
+                switch (keycode) {
+                    case KeyEvent.VK_LEFT:
+                        tryMove(currentPiece, currentX - 1, currentY);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        tryMove(currentPiece, currentX + 1, currentY);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        tryMove(currentPiece, currentX, currentY - 1);
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        tryMove(currentPiece.rotate(), currentX, currentY);
+                        break;
+                }
             }
         }
     }
